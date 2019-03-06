@@ -1,8 +1,14 @@
 import React from 'react';
 
-function Product(){
+function Product(props){
+    const {id, productName, price, imageUrl } = props;
     return(
-        <div>Product</div>
+        <div className="product">
+        <img src={imageUrl} alt={productName} />
+        <p>{productName}</p>
+        <p>{price}</p>
+
+        </div>
     );
 }
 

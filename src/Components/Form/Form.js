@@ -7,21 +7,48 @@ class Form extends Component{
         super();
 
         this.state = {
+            id: null,
             imageUrl: "",
             productName: "",
             price: ""
         }
+    this.handleCancel=this.handleCancel.bind(this)
+    }
+    handleImageUpdate(value){
+        this.setState({
+            imageUrl: value
+        })
+    }
+    handleProductNameUpdate(value){
+        this.setState({
+            productName: value
+        })
+    }
+    handlePriceUpdate(value){
+        this.setState({
+            price: value
+        })
+    }
+    handleCancel(){
+        this.setState({
+            imageUrl: '',
+            productName:'',
+            price:''
+        })
     }
     render(){
         return(
             <div className = "form">
                 <div>
-                    <input placeholder="Image URL"></input>
-                    <input placeholder="Product Name"></input>
-                    <input placeholder="Price"></input>
+                    <div>Image URL:</div>
+                    <input placeholder="Image URL" value={this.state.imageUrl} onChange={e => this.handleImageUpdate(e.target.value)}type="text"></input>
+                    <div>Product Name:</div>
+                    <input placeholder="Product Name" value={this.state.productName} onChange={e => this.handleProductNameUpdate(e.target.value)} type="text"></input>
+                    <div>Price:</div>
+                    <input placeholder="Price"value={this.state.price} onChange={e => this.handlePriceUpdate(e.target.value)} type="text"></input>
                 </div>
                 <div>
-                    <button>Cancel</button>
+                    <button onClick={this.handleCancel}>Cancel</button>
                     <button>Add to Inventory</button>
                 </div>
             </div>
@@ -30,10 +57,6 @@ class Form extends Component{
 }
 export default Form;
 
-//Add a name and price for the product
-//Add an image for the product
-//image preview that displays
-//provide default image if they don't provide one
-//the image container should remain the same
-//Should be able to click the 'Cancel' button to clear all boxes
-//a user should be able to click the 'add inventory' inventory button
+
+
+
