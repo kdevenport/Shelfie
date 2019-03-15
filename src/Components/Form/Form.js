@@ -7,56 +7,82 @@ class Form extends Component{
         super();
 
         this.state = {
-            id: null,
             imageUrl: "",
             productName: "",
-            price: ""
+            price: "",
+            selectedProduct: {}
         }
-    this.handleCancel=this.handleCancel.bind(this)
     }
-    handleImageUpdate(value){
+
+    componentDidMount(){
+        const {id} = this.props.match.params;
+        this.getProduct(id);
+    }
+
+    //methods
+    handleNameChange = (event) => {
         this.setState({
-            imageUrl: value
+            name: event.target.value
         })
     }
-    handleProductNameUpdate(value){
+
+    handlePriceChange = (event) => {
         this.setState({
-            productName: value
+            price: event.target.value
         })
     }
-    handlePriceUpdate(value){
+
+    handleImgChange = (event) => {
         this.setState({
-            price: value
+            imgURL: event.target.value
         })
     }
-    handleCancel(){
+
+    resetState = () => {
         this.setState({
-            imageUrl: '',
-            productName:'',
-            price:''
+            imgURL: '',
+            name: '',
+            price: ''
         })
     }
-    render(){
-        return(
-            <div className = "form">
-                <div>
-                    <div>Image URL:</div>
-                    <input placeholder="Image URL" value={this.state.imageUrl} onChange={e => this.handleImageUpdate(e.target.value)}type="text"></input>
-                    <div>Product Name:</div>
-                    <input placeholder="Product Name" value={this.state.productName} onChange={e => this.handleProductNameUpdate(e.target.value)} type="text"></input>
-                    <div>Price:</div>
-                    <input placeholder="Price"value={this.state.price} onChange={e => this.handlePriceUpdate(e.target.value)} type="text"></input>
-                </div>
-                <div>
-                    <button onClick={this.handleCancel}>Cancel</button>
-                    <button>Add to Inventory</button>
-                </div>
-            </div>
-        )
+    getProduct = (id) => {
+        axios.get(`/api/product/:${id}`).then(response => {
+            this.setState({
+               // console.log(response);
+            })
+        })
     }
+
+    createProduct = () => {
+        const {imgURL, name, price} = this.state;
+        const {getProducts} = this.props;
+
+        const product = {
+            imgURL: imgURL,
+            name: name,
+            price: price
+        }
+        axios.post('/api/product', product).then(response => {
+            getProducts();
+        });
+
+        this.resetState();
+    }
+
+
+  render() {
+      console.log(this.state)
+    return (
+      <div>
+        <div>
+            <input type="text" placeholder="name" onChange={(event) => this.handleNameChange(event)}/>
+            <input type="text" placeholder="img url" onChange={(event) => this.handleImgChange(event)}/>
+            <input type="text" placeholder="price" onChange={(event) => this.handlePriceChange(event)}/>
+            <button onClick={() => this.createProduct()}>Add to Inv</button>
+            <button onClick={() => this.resetState()}>Cancel</button>
+        </div>
+      </div>
+    )
+  }
 }
-export default Form;
-
-
-
-
+    

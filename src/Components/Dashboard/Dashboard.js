@@ -9,39 +9,35 @@ class Dashboard extends Component{
         super();
 
         this.state = {
-            inventoryList: []
+            inventoryList: [],
         }
     }
-    componentWillMount(){
-        this.getItemList();
+    componentDidMount(){
+        this.getProducts();
     }
-    componentDidUpdate(){
-        this.getItemList();
+    getSelectedProduct = (selectedProduct) => {
+        this.setState({
+            selectedProduct: selectedProduct
+        })
     }
-    getItemList(){
+    getProducts = () => {
         axios.get('/api/inventory').then((response) => {
             this.setState({
                 inventoryList: response.data
             })
         })
     }
-    deletProduct = (id) => {
-        axios.delete(`/api/product/{id}`).then( response => {
-            this.state({
-                inventoryList: response.data
-            })
+    deleteProduct = (id) => {
+        const{getProduct} = this.props;
+        axios.delete(`/api/product/${id}`).then( response => {
+         getProduct();
         })
     }
 
     render(){
-        const list = this.state.inventoryList.map((product, index) =>{
-            return( <Product
-                    getItemList = {() => this.getItemList()}
-                    currentProduct={product}
-                    key={index}
-                    delete={this.deleteProduct}/> 
-                )
-        })
+        const list = this.props.inventoryList.map((product, index) =>{
+            return <Product key = {product.id} product={product} deleteProduct={this.deleteProduct}/>
+        });
         return(
             <div>{list}</div>
         )

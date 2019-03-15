@@ -18,6 +18,7 @@ module.exports = {
         })
     },
     deleteProduct: (req, res) => {
+        const db = req.app.get('db');
         let {id} = req, params;
 
         req.app.get('db').delete_product([id]).then(() => {
