@@ -9,8 +9,8 @@ class Form extends Component{
         this.state = {
             imageUrl: "",
             productName: "",
-            price: "",
-            selectedProduct: {}
+            price: 0,
+            edit: false
         }
     }
 
@@ -47,15 +47,18 @@ class Form extends Component{
     }
     getProduct = (id) => {
         axios.get(`/api/product/:${id}`).then(response => {
+            console.log(response);
+            const {imgURL, name, price} = response.data;
             this.setState({
-               // console.log(response);
-            })
+               imgURL:imgURL,
+               name: name,
+               price: price
+            });
         })
     }
 
     createProduct = () => {
         const {imgURL, name, price} = this.state;
-        const {getProducts} = this.props;
 
         const product = {
             imgURL: imgURL,
@@ -63,26 +66,40 @@ class Form extends Component{
             price: price
         }
         axios.post('/api/product', product).then(response => {
-            getProducts();
+            this.props.history.push('/');
         });
 
         this.resetState();
+    }
+    updateProduct = () => {
+        const {id} = this.props.match.params;
+        axios.put(`/api/update/${id}`, this.state).then(response =>{
+            this.props.history.push('/');
+        })
     }
 
 
   render() {
       console.log(this.state)
     return (
-      <div>
         <div>
-            <input type="text" placeholder="name" onChange={(event) => this.handleNameChange(event)}/>
-            <input type="text" placeholder="img url" onChange={(event) => this.handleImgChange(event)}/>
-            <input type="text" placeholder="price" onChange={(event) => this.handlePriceChange(event)}/>
-            <button onClick={() => this.createProduct()}>Add to Inv</button>
-            <button onClick={() => this.resetState()}>Cancel</button>
-        </div>
-      </div>
+            <div>
+                <img src={this.state.imgURL} onError={() => {
+                     this.setState({
+                        imgURL: 'https://www.marylandhillel.org/wp-content/plugins/bc-flex-content/images/default-no-image.jpg'
+                     })
+                }} />
+                <input type="text" placeholder="name" onChange={(event) => this.handleNameChange(event)} />
+                <input type="text" placeholder="img url" onChange={(event) => this.handleImgChange(event)} />
+                <input type="text" placeholder="price" onChange={(event) => this.handlePriceChange(event)} />
+                <button onClick={() => this.updateProduct()}>Save Changes</button>
+                <button onClick={() => this.createProduct()}>Add To Inventory</button>
+                <button onClick={() => this.resetState()}>Cancel</button>
+             </div>
+         </div>    
     )
   }
 }
+
+export default Form;
     
