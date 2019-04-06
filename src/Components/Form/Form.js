@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 class Form extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             imageUrl: "",
@@ -58,11 +58,11 @@ class Form extends Component{
     }
 
     createProduct = () => {
-        const {imgURL, name, price} = this.state;
+        const {imgURL, productName, price} = this.state;
 
         const product = {
             imgURL: imgURL,
-            name: name,
+            productName: productName,
             price: price
         }
         axios.post('/api/product', product).then(response => {
@@ -73,14 +73,14 @@ class Form extends Component{
     }
     updateProduct = () => {
         const {id} = this.props.match.params;
-        axios.put(`/api/update/${id}`, this.state).then(response =>{
+        const {imgURL, productName, price } = this.state;
+        axios.put(`/api/product/${id}`, this.state).then(response =>{
             this.props.history.push('/');
         })
     }
 
 
   render() {
-      console.log(this.state)
     return (
         <div>
             <div>

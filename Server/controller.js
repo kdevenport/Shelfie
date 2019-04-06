@@ -9,17 +9,17 @@ module.exports = {
     },
     createProduct: (req, res) =>{
         let {name, price, image_url} = req.body;
-        console.log(req.app)
 
         req.app.get('db').create_product([name, price, image_url]).then(() => {
-            res.status(200)('Created Product');
-        }).catch(() =>{
+            res.status(200).send('Created Product');
+        }).catch((error) =>{
+            console.log(error);
             res.status(500).send('Unable to create product');
         })
     },
     deleteProduct: (req, res) => {
         const db = req.app.get('db');
-        let {id} = req, params;
+        let {id} = req.params;
 
         req.app.get('db').delete_product([id]).then(() => {
             res.status(200).send('Deleted');

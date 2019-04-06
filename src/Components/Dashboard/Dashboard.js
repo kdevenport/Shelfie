@@ -21,7 +21,7 @@ class Dashboard extends Component{
         })
     }
     getProducts = () => {
-        axios.get('/api/inventory').then((response) => {
+        axios.get('http://localhost:4040/api/inventory').then((response) => {
             this.setState({
                 inventoryList: response.data
             })
@@ -35,11 +35,15 @@ class Dashboard extends Component{
     }
 
     render(){
-        const list = this.props.inventoryList.map((product, index) =>{
-            return <Product key = {product.id} product={product} deleteProduct={this.deleteProduct}/>
+        const list = this.state.inventoryList.map((product, i) =>{
+            return <Product key = {i} product={product} deleteProduct={this.deleteProduct}/>
         });
+        console.log(this.state.inventoryList);
         return(
+            <div>
+                <button>Dashboard</button>
             <div>{list}</div>
+            </div>
         )
     }
 }
