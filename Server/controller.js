@@ -18,12 +18,13 @@ module.exports = {
         })
     },
     deleteProduct: (req, res) => {
-        const db = req.app.get('db');
+        let db = req.app.get('db');
         let {id} = req.params;
-
-        req.app.get('db').delete_product([id]).then(() => {
+        
+        db.delete_product([id]).then(() => {
             res.status(200).send('Deleted');
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err.message);
             res.status(500).send('Unable to Remove Product');
         })
     },

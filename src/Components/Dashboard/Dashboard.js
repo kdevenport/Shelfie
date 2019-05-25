@@ -28,9 +28,9 @@ class Dashboard extends Component{
         })
     }
     deleteProduct = (id) => {
-        const{getProduct} = this.props;
         axios.delete(`/api/product/${id}`).then( response => {
-         getProduct();
+            console.log(response);
+          this.getProducts();
         })
     }
 

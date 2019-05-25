@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 function Product(props){
@@ -10,7 +11,8 @@ function Product(props){
             <img src={product.image_url}></img>
             <p>{product.description}</p>
             <p>${Number(product.price).toLocaleString()}</p>
-            <button onClick = {() => deleteProduct(product.id)}>Delete Product</button>
+            <Link to={`/edit/${product.id}`}><button>Edit</button></Link>
+            <button onClick = {() => deleteProduct(product.product_id)}>Delete</button>
         </div>
     );
 }
