@@ -5,8 +5,8 @@ import axios from 'axios';
 
 
 class Dashboard extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             inventoryList: [],
@@ -15,11 +15,11 @@ class Dashboard extends Component{
     componentDidMount(){
         this.getProducts();
     }
-    getSelectedProduct = (selectedProduct) => {
-        this.setState({
-            selectedProduct: selectedProduct
-        })
-    }
+    // getSelectedProduct = (selectedProduct) => {
+    //     this.setState({
+    //         selectedProduct: selectedProduct
+    //     })
+    // }
     getProducts = () => {
         axios.get('http://localhost:4040/api/inventory').then((response) => {
             this.setState({
@@ -41,7 +41,7 @@ class Dashboard extends Component{
         console.log(this.state.inventoryList);
         return(
             <div>
-                <button>Dashboard</button>
+                <button className="Dashboard">Dashboard</button>
             <div>{list}</div>
             </div>
         )
