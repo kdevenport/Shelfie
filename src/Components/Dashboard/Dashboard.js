@@ -41,7 +41,6 @@ class Dashboard extends Component{
         console.log(this.state.inventoryList);
         return(
             <div>
-                <button className="Dashboard">Dashboard</button>
             <div>{list}</div>
             </div>
         )
