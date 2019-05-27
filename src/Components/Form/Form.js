@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import './form.css';
+
 
 class Form extends Component{
     constructor(props){
@@ -82,19 +84,26 @@ class Form extends Component{
 
   render() {
     return (
-        <div>
+        <div className = "form">
             <div>
+                <div className="img_error">
                 <img src={this.state.imgURL} onError={() => {
                      this.setState({
                         imgURL: 'https://www.marylandhillel.org/wp-content/plugins/bc-flex-content/images/default-no-image.jpg'
                      })
                 }} />
-                <input type="text" placeholder="name" onChange={(event) => this.handleNameChange(event)} />
-                <input type="text" placeholder="img url" onChange={(event) => this.handleImgChange(event)} />
-                <input type="text" placeholder="price" onChange={(event) => this.handlePriceChange(event)} />
-                <button onClick={() => this.updateProduct()}>Save Changes</button>
-                <button onClick={() => this.createProduct()}>Add To Inventory</button>
+                </div>
+                <p>Image URL:</p>
+                <input type="text" onChange={(event) => this.handleImgChange(event)} />
+                <p>Product Name:</p>
+                <input type="text" onChange={(event) => this.handleNameChange(event)} />
+                <p>Price:</p>
+                <input type="text" onChange={(event) => this.handlePriceChange(event)} />
+                <div className = "form_button">
+                {/* <button onClick={() => this.updateProduct()}>Save Changes</button> */}
                 <button onClick={() => this.resetState()}>Cancel</button>
+                <button onClick={() => this.createProduct()}>Add To Inventory</button>
+                </div>
              </div>
          </div>    
     )

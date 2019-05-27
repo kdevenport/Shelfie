@@ -6,6 +6,8 @@ import Header from './Components/Header/Header';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Form from './Components/Form/Form';
 
+import './App.css';
+
 class App extends Component {
   render() {
     return (

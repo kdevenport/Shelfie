@@ -15,11 +15,11 @@ class Dashboard extends Component{
     componentDidMount(){
         this.getProducts();
     }
-    // getSelectedProduct = (selectedProduct) => {
-    //     this.setState({
-    //         selectedProduct: selectedProduct
-    //     })
-    // }
+    getSelectedProduct = (selectedProduct) => {
+        this.setState({
+            selectedProduct: selectedProduct
+        })
+    }
     getProducts = () => {
         axios.get('http://localhost:4040/api/inventory').then((response) => {
             this.setState({
