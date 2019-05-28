@@ -100,7 +100,7 @@ class Form extends Component{
                 <p>Price:</p>
                 <input type="text" onChange={(event) => this.handlePriceChange(event)} />
                 <div className = "form_button">
-                {/* <button onClick={() => this.updateProduct()}>Save Changes</button> */}
+                <button onClick={() => this.updateProduct()}>Save Changes</button>
                 <button onClick={() => this.resetState()}>Cancel</button>
                 <button onClick={() => this.createProduct()}>Add To Inventory</button>
                 </div>

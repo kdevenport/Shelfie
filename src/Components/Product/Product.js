@@ -1,19 +1,22 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 function Product(props){
     const {deleteProduct, product } = props;
     console.log(product);
     return(
-        <div className="Product">
-            <p>{product.name}</p>
-            <img src={product.image_url}></img>
-            <p>{product.description}</p>
+        <div className="product">
+            <img className="product_img" src={product.image_url}></img>
+            <div className="product-box">
+            <p className="product_title">{product.name}</p>
+            <p className="product_price">{product.description}</p>
             <p>${Number(product.price).toLocaleString()}</p>
+            </div>
+            <div className="product_buttons">
             <button onClick = {() => deleteProduct(product.product_id)}>Delete</button>
-            <Link to={`/edit/${product.id}`}><button>Edit</button></Link>
-           
+            <button onClick ={() => props.history.push(`/edit/${product.id}`)}>Edit</button>
+            </div>
         </div>
     );
 }
