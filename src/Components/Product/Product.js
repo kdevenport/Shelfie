@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import './Product.css';
+
 
 function Product(props){
     const {deleteProduct, product } = props;

@@ -40,7 +40,7 @@ class Dashboard extends Component{
         });
         console.log(this.state.inventoryList);
         return(
-            <div>
+            <div className="Dashboard">
             <div>{list}</div>
             </div>
         )
