@@ -9,7 +9,7 @@ function Product(props){
     console.log(product);
     return(
         <div className="product">
-            <img className="product_img" src={product.image_url}></img>
+            <img className="product_img" src={product.imageURL}></img>
             <div className="product-box">
             <p className="product_title">{product.name}</p>
             <p className="product_price">{product.description}</p>

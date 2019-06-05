@@ -2,17 +2,18 @@
     width: 350px;
     height: 520px;
     padding: 15px;
-    margin: 10 px auto;
+    margin: 10px auto;
     border-radius: 7px;
     background-color: #3ad886;
-    display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
+
 }
 
 .form * {
     margin: 7px 0;
+    
 }
 
 .form p {
@@ -29,6 +30,7 @@
 }
 
 .form input {
+    width: 100%;
     font-family: Open Sans, sans-serif;
     font-weight: 700;
 }

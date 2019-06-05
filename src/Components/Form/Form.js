@@ -36,13 +36,13 @@ class Form extends Component{
 
     handleImgChange = (event) => {
         this.setState({
-            imgURL: event.target.value
+            imageURL: event.target.value
         })
     }
 
     resetState = () => {
         this.setState({
-            imgURL: '',
+            imageURL: '',
             name: '',
             price: ''
         })
@@ -50,9 +50,9 @@ class Form extends Component{
     getProduct = (id) => {
         axios.get(`/api/product/:${id}`).then(response => {
             console.log(response);
-            const {imgURL, name, price} = response.data;
+            const {imageURL, name, price} = response.data;
             this.setState({
-               imgURL:imgURL,
+               imageURL:imageURL,
                name: name,
                price: price
             });
@@ -60,10 +60,10 @@ class Form extends Component{
     }
 
     createProduct = () => {
-        const {imgURL, productName, price} = this.state;
+        const {imageURL, productName, price} = this.state;
 
         const product = {
-            imgURL: imgURL,
+            imageURL: imageURL,
             productName: productName,
             price: price
         }
@@ -75,7 +75,7 @@ class Form extends Component{
     }
     updateProduct = () => {
         const {id} = this.props.match.params;
-        const {imgURL, productName, price } = this.state;
+        const {imageURL, productName, price } = this.state;
         axios.put(`/api/product/${id}`, this.state).then(response =>{
             this.props.history.push('/');
         })
@@ -87,7 +87,7 @@ class Form extends Component{
         <div className = "form">
             <div>
                 <div className="img_error">
-                <img src={this.state.imgURL} onError={() => {
+                <img src={this.state.imageURL} onError={() => {
                      this.setState({
                         imgURL: 'https://www.marylandhillel.org/wp-content/plugins/bc-flex-content/images/default-no-image.jpg'
                      })
